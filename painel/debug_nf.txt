@@ -1,0 +1,533 @@
+=== DEBUG DETALHADO ===
+Data/Hora: 2025-05-27 15:16:52
+POST: Array
+(
+)
+
+GET: Array
+(
+    [pagina] => config_fiscal
+)
+
+REQUEST: Array
+(
+    [pagina] => config_fiscal
+)
+
+SESSION: Array
+(
+    [usuario_logado_pagina] => 1
+    [nome] => Alessandro Marques
+    [id] => 1
+    [nivel] => Administrador
+    [registros] => Sim
+    [empresa] => 1
+)
+
+=== FIM DO DEBUG ===
+=== DEBUG DETALHADO ===
+Data/Hora: 2025-05-27 15:17:19
+POST: Array
+(
+)
+
+GET: Array
+(
+    [pagina] => config_fiscal
+)
+
+REQUEST: Array
+(
+    [pagina] => config_fiscal
+)
+
+SESSION: Array
+(
+    [usuario_logado_pagina] => 1
+    [nome] => Alessandro Marques
+    [id] => 1
+    [nivel] => Administrador
+    [registros] => Sim
+    [empresa] => 1
+)
+
+=== FIM DO DEBUG ===
+=== MODO DE TESTE - LISTAGEM SIMULADA ===
+Data/Hora: 2025-05-27 17:00:39
+Simulando dados de notas fiscais.
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM SIMULADA ===
+Data/Hora: 2025-05-27 17:00:51
+Simulando dados de notas fiscais.
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM SIMULADA ===
+Data/Hora: 2025-05-27 17:02:04
+Simulando dados de notas fiscais.
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM SIMULADA ===
+Data/Hora: 2025-05-27 17:04:43
+Simulando dados de notas fiscais.
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM SIMULADA ===
+Data/Hora: 2025-05-27 17:07:40
+Simulando dados de notas fiscais.
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM SIMULADA ===
+Data/Hora: 2025-05-27 17:08:56
+Simulando dados de notas fiscais.
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM SIMULADA ===
+Data/Hora: 2025-05-27 17:10:04
+Simulando dados de notas fiscais.
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM SIMULADA ===
+Data/Hora: 2025-05-27 17:12:09
+Simulando dados de notas fiscais.
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM SIMULADA ===
+Data/Hora: 2025-05-27 17:13:40
+Simulando dados de notas fiscais.
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM SIMULADA ===
+Data/Hora: 2025-05-27 17:15:06
+Simulando dados de notas fiscais.
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM SIMULADA ===
+Data/Hora: 2025-05-27 17:26:53
+Simulando dados de notas fiscais.
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM SIMULADA ===
+Data/Hora: 2025-05-27 17:32:11
+Simulando dados de notas fiscais.
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM SIMULADA ===
+Data/Hora: 2025-05-27 17:32:17
+Simulando dados de notas fiscais.
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-27 17:36:44
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 1
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-27 17:36:52
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 1
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-27 17:37:05
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 1
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-27 17:39:42
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 1
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-27 17:39:44
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 1
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - VISUALIZAR NOTA SIMULADA ===
+Data/Hora: 2025-05-27 17:39:45
+Buscando nota fiscal com ID local: mock-id-683621498d4a1 no banco de dados.
+Dados encontrados (simulados): {"numero":"6338","data_emissao":"2025-05-27","valor_total":"12.00","status":"autorizada","id":"mock-id-683621498d4a1","observacoes":"","tomador":{"nome":"Cliente Simulado","cpf_cnpj":"","email":"","telefone":"","endereco":{"cep":"","logradouro":"","numero":"","complemento":"","bairro":"","cidade":"","estado":""}},"servicos":[{"descricao":"Servi\u00e7o Simulado","valor":"12.00","aliquota_iss":0,"valor_iss":0}]}
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-27 17:42:02
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 1
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 20:48:08
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 0
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 20:48:10
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 0
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 20:51:11
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 0
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 20:51:12
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 0
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 20:52:19
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 0
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 20:53:04
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 0
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 20:53:06
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 0
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 20:54:04
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 0
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 20:56:31
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 0
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 20:56:37
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 0
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 20:58:21
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 0
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 20:58:22
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 0
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 20:58:44
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 0
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 20:58:51
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 0
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 21:03:17
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 0
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 21:05:25
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 0
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 21:05:29
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 0
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 21:05:39
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 0
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 21:05:50
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 0
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 21:08:40
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 0
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 21:09:27
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 0
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 21:09:27
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 0
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 21:09:28
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 0
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 21:09:28
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 0
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 21:09:28
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 0
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 21:09:28
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 0
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 21:09:56
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 0
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 21:10:20
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 0
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 21:10:44
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 2
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - VISUALIZAR NOTA SIMULADA ===
+Data/Hora: 2025-05-28 21:10:49
+Buscando nota fiscal com ID local: mock-id-6837a5fd1d90c no banco de dados.
+Dados encontrados (simulados): {"numero":"6721","data_emissao":"2025-05-28","valor_total":"12.00","status":"autorizada","id":"mock-id-6837a5fd1d90c","observacoes":"","tomador":{"nome":"Cliente Simulado","cpf_cnpj":"","email":"","telefone":"","endereco":{"cep":"","logradouro":"","numero":"","complemento":"","bairro":"","cidade":"","estado":""}},"servicos":[{"descricao":"Servi\u00e7o Simulado","valor":"12.00","aliquota_iss":0,"valor_iss":0}]}
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 21:10:57
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 2
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 21:11:51
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 2
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 21:11:57
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 2
+=== FIM DO MODO DE TESTE ===
+
+=== MODO DE TESTE - LISTAGEM DO BANCO ===
+Data/Hora: 2025-05-28 21:14:43
+Buscando notas fiscais do banco local para a empresa ID: 1
+Notas encontradas: 2
+=== FIM DO MODO DE TESTE ===
+
+=== MODO REAL - ERRO AO LISTAR NFSE ===
+Data/Hora: 2025-05-28 21:15:26
+URL: https://api.sandbox.nuvemfiscal.com.br/v1/nfse?empresa_id=43691539000147
+Status HTTP: 401
+Resposta da API: Malformed Compact Serialization
+Erro CURL: 
+Headers: Array
+(
+    [0] => Content-Type: application/json
+    [1] => Authorization: Bearer a0kWBFCvLS22r3uQqyPi
+)
+
+=== FIM DO ERRO AO LISTAR NFSE ===
+
+=== MODO REAL - ERRO AO LISTAR NFSE ===
+Data/Hora: 2025-05-28 21:15:38
+URL: https://api.sandbox.nuvemfiscal.com.br/v1/nfse?empresa_id=43691539000147
+Status HTTP: 401
+Resposta da API: Malformed Compact Serialization
+Erro CURL: 
+Headers: Array
+(
+    [0] => Content-Type: application/json
+    [1] => Authorization: Bearer a0kWBFCvLS22r3uQqyPi
+)
+
+=== FIM DO ERRO AO LISTAR NFSE ===
+
+=== MODO REAL - ERRO AO LISTAR NFSE ===
+Data/Hora: 2025-05-28 21:21:07
+URL: https://api.sandbox.nuvemfiscal.com.br/nfse?empresa_id=43691539000147
+Status HTTP: 401
+Resposta da API: Malformed Compact Serialization
+Erro CURL: 
+Headers: Array
+(
+    [0] => Content-Type: application/json
+    [1] => Authorization: Bearer a0kWBFCvLS22r3uQqyPi
+)
+
+=== FIM DO ERRO AO LISTAR NFSE ===
+
+=== MODO REAL - ERRO AO LISTAR NFSE ===
+Data/Hora: 2025-05-28 21:21:23
+URL: https://api.sandbox.nuvemfiscal.com.br/nfse?empresa_id=43691539000147
+Status HTTP: 401
+Resposta da API: Malformed Compact Serialization
+Erro CURL: 
+Headers: Array
+(
+    [0] => Content-Type: application/json
+    [1] => Authorization: Bearer a0kWBFCvLS22r3uQqyPi
+)
+
+=== FIM DO ERRO AO LISTAR NFSE ===
+
+=== MODO REAL - ERRO AO LISTAR NFSE ===
+Data/Hora: 2025-05-28 21:22:28
+URL: https://api.sandbox.nuvemfiscal.com.br/nfse?empresa_id=43691539000147
+Status HTTP: 401
+Resposta da API: Malformed Compact Serialization
+Erro CURL: 
+Headers: Array
+(
+    [0] => Content-Type: application/json
+    [1] => Authorization: Bearer a0kWBFCvLS22r3uQqyPi
+)
+
+=== FIM DO ERRO AO LISTAR NFSE ===
+
+=== MODO REAL - ERRO AO LISTAR NFSE ===
+Data/Hora: 2025-05-28 21:23:55
+URL: https://api.sandbox.nuvemfiscal.com.br/nfse?empresa_id=43691539000147
+Status HTTP: 401
+Resposta da API: Malformed Compact Serialization
+Erro CURL: 
+Headers: Array
+(
+    [0] => Content-Type: application/json
+    [1] => Authorization: Bearer a0kWBFCvLS22r3uQqyPi
+)
+
+=== FIM DO ERRO AO LISTAR NFSE ===
+
+=== MODO REAL - ERRO AO LISTAR NFSE ===
+Data/Hora: 2025-05-28 21:24:05
+URL: https://api.sandbox.nuvemfiscal.com.br/nfse?empresa_id=43691539000147
+Status HTTP: 401
+Resposta da API: Malformed Compact Serialization
+Erro CURL: 
+Headers: Array
+(
+    [0] => Content-Type: application/json
+    [1] => Authorization: Bearer a0kWBFCvLS22r3uQqyPi
+)
+
+=== FIM DO ERRO AO LISTAR NFSE ===
+
+=== MODO REAL - ERRO AO LISTAR NFSE ===
+Data/Hora: 2025-05-28 21:24:58
+URL: https://api.sandbox.nuvemfiscal.com.br/nfse?empresa_id=43691539000147
+Status HTTP: 401
+Resposta da API: Malformed Compact Serialization
+Erro CURL: 
+Headers: Array
+(
+    [0] => Content-Type: application/json
+    [1] => Authorization: Bearer a0kWBFCvLS22r3uQqyPi
+)
+
+=== FIM DO ERRO AO LISTAR NFSE ===
+
+=== MODO REAL - ERRO AO LISTAR NFSE ===
+Data/Hora: 2025-05-28 21:25:30
+URL: https://api.sandbox.nuvemfiscal.com.br/nfse?empresa_id=43691539000147
+Status HTTP: 401
+Resposta da API: Malformed Compact Serialization
+Erro CURL: 
+Headers: Array
+(
+    [0] => Content-Type: application/json
+    [1] => Authorization: Bearer a0kWBFCvLS22r3uQqyPi
+)
+
+=== FIM DO ERRO AO LISTAR NFSE ===
+
+=== MODO REAL - ERRO AO LISTAR NFSE ===
+Data/Hora: 2025-05-28 21:30:34
+URL: https://api.sandbox.nuvemfiscal.com.br/nfe?empresa_id=43691539000147
+Status HTTP: 401
+Resposta da API: Malformed Compact Serialization
+Erro CURL: 
+Headers: Array
+(
+    [0] => Content-Type: application/json
+    [1] => Authorization: Bearer a0kWBFCvLS22r3uQqyPi
+)
+
+=== FIM DO ERRO AO LISTAR NFSE ===
+
+=== MODO REAL - ERRO AO LISTAR NFSE ===
+Data/Hora: 2025-05-28 21:38:17
+URL: https://api.sandbox.nuvemfiscal.com.br/nfe?empresa_id=43691539000147
+Status HTTP: 401
+Resposta da API: Malformed Compact Serialization
+Erro CURL: 
+Headers: Array
+(
+    [0] => Content-Type: application/json
+    [1] => Authorization: Bearer a0kWBFCvLS22r3uQqyPi
+)
+
+=== FIM DO ERRO AO LISTAR NFSE ===
+
+=== MODO REAL - ERRO AO LISTAR NFSE ===
+Data/Hora: 2025-05-28 21:50:55
+URL: https://api.sandbox.nuvemfiscal.com.br/nfe?empresa_id=43691539000147
+Status HTTP: 401
+Resposta da API: Malformed Compact Serialization
+Erro CURL: 
+Headers: Array
+(
+    [0] => Content-Type: application/json
+    [1] => Authorization: Bearer a0kWBFCvLS22r3uQqyPi
+)
+
+=== FIM DO ERRO AO LISTAR NFSE ===
+
