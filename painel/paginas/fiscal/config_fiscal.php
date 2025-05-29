@@ -2,10 +2,16 @@
 // painel/paginas/fiscal/config_fiscal.php
 
 @session_start();
-require_once("../conexao.php");
+if(@$_SESSION['nivel_usuario'] == null || @$_SESSION['nivel_usuario'] != 'admin'){
+    echo "<script language='javascript'> window.location='../index.php' </script>";
+    exit();
+}
+
+require_once("../config/conexao.php");
+require_once("../config/config.php");
 
 // Lógica para listar empresas para que o admin possa selecionar e configurar
-$query_empresas = $pdo->query("SELECT id, nome, cpf FROM empresas ORDER BY nome ASC");
+$query_empresas = $pdo->query("SELECT id, nome_razao_social, cnpj FROM empresas ORDER BY nome_razao_social ASC");
 $empresas = $query_empresas->fetchAll(PDO::FETCH_ASSOC);
 
 $empresa_selecionada = null;
@@ -31,7 +37,7 @@ if (isset($_GET['id_empresa_cfg']) && !empty($_GET['id_empresa_cfg'])) {
                         <option value="">-- Selecione uma Empresa --</option>
                         <?php foreach ($empresas as $emp): ?>
                             <option value="<?php echo $emp['id']; ?>" <?php echo ($empresa_selecionada && $empresa_selecionada['id'] == $emp['id']) ? 'selected' : ''; ?>>
-                                <?php echo $emp['nome'] . ' (' . $emp['cpf'] . ')'; ?>
+                                <?php echo $emp['nome_razao_social'] . ' (' . $emp['cnpj'] . ')'; ?>
                             </option>
                         <?php endforeach; ?>
                     </select>

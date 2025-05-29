@@ -531,3 +531,17 @@ Headers: Array
 
 === FIM DO ERRO AO LISTAR NFSE ===
 
+=== MODO REAL - ERRO AO LISTAR NFSE ===
+Data/Hora: 2025-05-29 01:13:00
+URL: https://api.sandbox.nuvemfiscal.com.br/nfe?empresa_id=43691539000147
+Status HTTP: 401
+Resposta da API: Malformed Compact Serialization
+Erro CURL: 
+Headers: Array
+(
+    [0] => Content-Type: application/json
+    [1] => Authorization: Bearer a0kWBFCvLS22r3uQqyPi
+)
+
+=== FIM DO ERRO AO LISTAR NFSE ===
+

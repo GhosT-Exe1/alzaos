@@ -1,9 +1,9 @@
 <?php
-// painel/apis/emitir_nfe.php
+// painel/apis/emitir_nfce.php
 
 require_once("../config/conexao.php");
 require_once("../config/config.php");
-require_once("../inc/NuvemFiscalSDKService.php"); // Inclui a nova classe de serviço com SDK
+require_once("../inc/NuvemFiscalSDKService.php");
 
 @session_start();
 if(@$_SESSION['nivel_usuario'] == null || @$_SESSION['nivel_usuario'] != 'admin'){
@@ -51,18 +51,16 @@ if (empty($itens_venda)) {
     exit();
 }
 
-// --- CONSTRUÇÃO DO PAYLOAD DA NF-E (CONSULTE A DOCUMENTAÇÃO DA NUVEM FISCAL/NFE.IO!) ---
-// ESTE É UM EXEMPLO GENÉRICO. OS CAMPOS EXATOS E A ESTRUTURA DE IMPOSTOS SÃO CRÍTICAS!
-// Adapte os nomes dos campos do seu DB para os esperados pela API.
-
-$nfeData = [
+// --- CONSTRUÇÃO DO PAYLOAD DA NFC-E (CONSULTE A DOCUMENTAÇÃO DA NUVEM FISCAL/NFE.IO!) ---
+// A estrutura da NFC-e é similar à NF-e, mas com algumas particularidades (ex: sem transportador, campos simplificados).
+$nfceData = [
     "cnpj" => preg_replace('/[^0-9]/', '', $empresa['cnpj']),
-    "ambiente" => NUVEM_FISCAL_AMBIENTE, // 'sandbox' ou 'production'
+    "ambiente" => NUVEM_FISCAL_AMBIENTE,
     "finalidade" => "normal",
     "naturezaOperacao" => "Venda de Mercadoria",
-    "consumidorFinal" => ($venda['tipo_cliente'] == 'fisica'),
-    "indicadorPresenca" => "operacao_presencial",
-    "modalidadeFrete" => "sem_frete",
+    "consumidorFinal" => true, // NFC-e é sempre para consumidor final
+    "indicadorPresenca" => "operacao_presencial", // NFC-e geralmente é presencial
+    "modalidadeFrete" => "sem_frete", // NFC-e não tem transporte
     "informacoesAdicionais" => "Documento emitido por software: Alzaos SaaS. Ref. Venda ID: " . $id_venda,
     "emitente" => [
         "nomeRazaoSocial" => $empresa['nome_razao_social'],
@@ -75,27 +73,18 @@ $nfeData = [
             "nomeMunicipio" => $empresa['cidade'],
             "uf" => $empresa['estado'],
             "cep" => preg_replace('/[^0-9]/', '', $empresa['cep']),
-            "codigoPais" => 1058, // Brasil
+            "codigoPais" => 1058,
             "nomePais" => "Brasil"
         ],
         "inscricaoEstadual" => preg_replace('/[^0-9]/', '', $empresa['inscricao_estadual']),
-        "regimeTributario" => $empresa['regime_tributario'], // 'simples_nacional' ou 'regime_normal'
+        "regimeTributario" => $empresa['regime_tributario'],
     ],
+    // Destinatário pode ser omitido na NFC-e para vendas no balcão
     "destinatario" => [
         "tipoPessoa" => ($venda['tipo_cliente'] == 'fisica' ? 'fisica' : 'juridica'),
         "cpfCnpj" => preg_replace('/[^0-9]/', '', $venda['cpf_cnpj_cliente']),
         "nomeRazaoSocial" => $venda['nome_cliente'],
-        "endereco" => [
-            "logradouro" => $venda['endereco_cliente'],
-            "numero" => $venda['numero_endereco_cliente'],
-            "bairro" => $venda['bairro_cliente'],
-            "codigoMunicipio" => (int) $venda['codigo_municipio_ibge_cliente'],
-            "nomeMunicipio" => $venda['cidade_cliente'],
-            "uf" => $venda['estado_cliente'],
-            "cep" => preg_replace('/[^0-9]/', '', $venda['cep_cliente']),
-            "codigoPais" => 1058,
-            "nomePais" => "Brasil"
-        ]
+        // Endereço do destinatário não é obrigatório na NFC-e se não identificado.
     ],
     "itens" => [],
     "total" => [
@@ -110,12 +99,12 @@ $nfeData = [
     ]
 ];
 
-$total_produtos_nfe = 0;
-$total_nfe_final = 0;
-$total_icms_nfe = 0;
-$total_ipi_nfe = 0;
-$total_pis_nfe = 0;
-$total_cofins_nfe = 0;
+$total_produtos_nfce = 0;
+$total_nfce_final = 0;
+$total_icms_nfce = 0;
+$total_ipi_nfce = 0;
+$total_pis_nfce = 0;
+$total_cofins_nfce = 0;
 
 foreach ($itens_venda as $item) {
     $query_produto = $pdo->prepare("SELECT * FROM produtos WHERE id = :id_produto");
@@ -129,22 +118,20 @@ foreach ($itens_venda as $item) {
     }
 
     $valor_total_item = $item['quantidade'] * $item['valor_unitario'];
-    $total_produtos_nfe += $valor_total_item;
+    $total_produtos_nfce += $valor_total_item;
 
-    // LÓGICA DE IMPOSTOS (EXEMPLO SIMPLIFICADO - REQUER AJUSTES COM SEU CONTADOR!)
+    // LÓGICA DE IMPOSTOS NFC-E (EXEMPLO SIMPLIFICADO - REQUER AJUSTES COM SEU CONTADOR!)
+    // A tributação na NFC-e para o Simples Nacional é comum.
     $icms_valor = 0; $ipi_valor = 0; $pis_valor = 0; $cofins_valor = 0;
     $cst_icms = "00"; $cst_pis = "01"; $cst_cofins = "01"; $cst_ipi = "50";
 
     if ($empresa['regime_tributario'] == 'simples_nacional') {
-        $cst_icms = "102"; // CSOSN para Simples Nacional (ex: Tributada sem permissão de crédito)
-        $cst_pis = "49"; // Outras Operações (Simples Nacional)
-        $cst_cofins = "49"; // Outras Operações (Simples Nacional)
-        $cst_ipi = "99"; // Outras Saídas
-        // Simples Nacional geralmente não destaca ICMS/IPI/PIS/COFINS no campo 'valor',
-        // mas precisa da alíquota do Simples Nacional na NFe (campo 'pSimplesNacional')
-        // Consulte a documentação da NFe.io para como passar o 'pSimplesNacional'
+        $cst_icms = "102"; // CSOSN para Simples Nacional
+        $cst_pis = "49";
+        $cst_cofins = "49";
+        $cst_ipi = "99";
+        // NFC-e para Simples Nacional também precisa de campos específicos.
     } else {
-        // Exemplo de cálculo para Regime Normal
         $aliquota_icms = 0.18;
         $aliquota_ipi = 0.05;
         $aliquota_pis = 0.0065;
@@ -156,17 +143,17 @@ foreach ($itens_venda as $item) {
         $cofins_valor = round($valor_total_item * $aliquota_cofins, 2);
     }
 
-    $total_icms_nfe += $icms_valor;
-    $total_ipi_nfe += $ipi_valor;
-    $total_pis_nfe += $pis_valor;
-    $total_cofins_nfe += $cofins_valor;
+    $total_icms_nfce += $icms_valor;
+    $total_ipi_nfce += $ipi_valor;
+    $total_pis_nfce += $pis_valor;
+    $total_cofins_nfce += $cofins_valor;
 
-    $nfeData['itens'][] = [
+    $nfceData['itens'][] = [
         "numeroItem" => (int) $item['id'],
         "codigoProduto" => $produto['codigo'],
         "descricao" => $produto['nome'],
         "ncm" => preg_replace('/[^0-9]/', '', $produto['ncm']),
-        "cfop" => "5102", // Adapte o CFOP conforme a operação!
+        "cfop" => "5102", // Adapte o CFOP!
         "unidadeComercial" => $produto['unidade'],
         "quantidadeComercial" => (float) $item['quantidade'],
         "valorUnitarioComercial" => (float) $item['valor_unitario'],
@@ -177,13 +164,10 @@ foreach ($itens_venda as $item) {
         "impostos" => [
             "icms" => [
                 "origem" => 0,
-                "cst" => $cst_icms, // ou csosn para simples nacional
+                "cst" => $cst_icms, // ou csosn
                 "baseCalculo" => (float) $valor_total_item,
                 "aliquota" => (float) ($aliquota_icms * 100),
                 "valor" => (float) $icms_valor,
-                // No Simples Nacional, pode ser necessário adicionar outros campos como pSimplesNacional, vCredICMSSN
-                // "pSimplesNacional" => 7.00, // Exemplo de alíquota do Simples
-                // "vCredICMSSN" => round($valor_total_item * 0.07, 2), // Exemplo de valor de crédito de ICMS
             ],
             "ipi" => [
                 "cst" => $cst_ipi,
@@ -207,69 +191,69 @@ foreach ($itens_venda as $item) {
     ];
 }
 
-$nfeData['total']['valorTotalProdutos'] = (float) $total_produtos_nfe;
-$nfeData['total']['valorTotal'] = (float) ($total_produtos_nfe + $total_ipi_nfe); // IPI geralmente soma no total da NFe
-$nfeData['total']['icms'] = (float) $total_icms_nfe;
-$nfeData['total']['ipi'] = (float) $total_ipi_nfe;
-$nfeData['total']['pis'] = (float) $total_pis_nfe;
-$nfeData['total']['cofins'] = (float) $total_cofins_nfe;
+$nfceData['total']['valorTotalProdutos'] = (float) $total_produtos_nfce;
+$nfceData['total']['valorTotal'] = (float) ($total_produtos_nfce + $total_ipi_nfce);
+$nfceData['total']['icms'] = (float) $total_icms_nfce;
+$nfceData['total']['ipi'] = (float) $total_ipi_nfce;
+$nfceData['total']['pis'] = (float) $total_pis_nfce;
+$nfceData['total']['cofins'] = (float) $total_cofins_nfce;
 
 // Dados de pagamento (exemplo - ajuste conforme sua forma de pagamento)
-$nfeData['pagamento']['detalhes'][] = [
-    "formaPagamento" => "dinheiro", // Adapte para 'cartao_credito', 'boleto', 'pix' etc.
-    "valor" => (float) $nfeData['total']['valorTotal']
+$nfceData['pagamento']['detalhes'][] = [
+    "formaPagamento" => "dinheiro",
+    "valor" => (float) $nfceData['total']['valorTotal']
 ];
 
 
-// --- EMISSÃO DA NOTA FISCAL VIA SDK ---
+// --- EMISSÃO DA NOTA FISCAL CONSUMIDOR VIA SDK ---
 $nuvemFiscalService = new NuvemFiscalSDKService();
-$response = $nuvemFiscalService->emitirNfe($nfeData);
+$response = $nuvemFiscalService->emitirNfce($nfceData);
 
-header('Content-Type: application/json'); // Garante que a resposta é JSON
+header('Content-Type: application/json');
 
 if ($response['success']) {
-    $nfeRetorno = $response['data'];
-    $id_nfe_nuvem_fiscal = $nfeRetorno->id;
-    $chave_acesso = $nfeRetorno->chaveAcesso ?? null;
-    $status = $nfeRetorno->status;
-    $xml_url = $nfeRetorno->links->xml ?? null;
-    $danfe_url = $nfeRetorno->links->danfe ?? null;
-    $numero_nfe = $nfeRetorno->numero ?? null;
-    $serie_nfe = $nfeRetorno->serie ?? null;
+    $nfceRetorno = $response['data'];
+    $id_nfce_nuvem_fiscal = $nfceRetorno->id;
+    $chave_acesso = $nfceRetorno->chaveAcesso ?? null;
+    $status = $nfceRetorno->status;
+    $xml_url = $nfceRetorno->links->xml ?? null;
+    $danfe_url = $nfceRetorno->links->danfe ?? null;
+    $numero_nfce = $nfceRetorno->numero ?? null;
+    $serie_nfce = $nfceRetorno->serie ?? null;
 
-    // Salvar/Atualizar dados da NFe no seu banco de dados
+    // Salvar/Atualizar dados da NFCe no seu banco de dados (reutilizando a tabela notas_fiscais)
     $pdo->beginTransaction();
     try {
-        $query_check = $pdo->prepare("SELECT id FROM notas_fiscais WHERE id_venda = :id_venda AND tipo_nota = 'NFE'");
+        $query_check = $pdo->prepare("SELECT id FROM notas_fiscais WHERE id_venda = :id_venda AND tipo_nota = 'NFCE'");
         $query_check->bindValue(":id_venda", $id_venda);
         $query_check->execute();
-        $existing_nfe = $query_check->fetch(PDO::FETCH_ASSOC);
+        $existing_nfce = $query_check->fetch(PDO::FETCH_ASSOC);
 
-        if ($existing_nfe) {
-            $query = $pdo->prepare("UPDATE notas_fiscais SET id_nuvem_fiscal = :id_nuvem_fiscal, chave_acesso = :chave_acesso, status = :status, xml_url = :xml_url, danfe_url = :danfe_url, numero_nfe = :numero_nfe, serie_nfe = :serie_nfe, data_atualizacao = NOW() WHERE id_venda = :id_venda AND tipo_nota = 'NFE'");
+        if ($existing_nfce) {
+            $query = $pdo->prepare("UPDATE notas_fiscais SET id_nuvem_fiscal = :id_nuvem_fiscal, chave_acesso = :chave_acesso, status = :status, xml_url = :xml_url, danfe_url = :danfe_url, numero_nfe = :numero_nfe, serie_nfe = :serie_nfe, data_atualizacao = NOW() WHERE id_venda = :id_venda AND tipo_nota = 'NFCE'");
             $query->bindValue(":id_venda", $id_venda);
         } else {
-            $query = $pdo->prepare("INSERT INTO notas_fiscais (id_empresa, id_venda, tipo_nota, id_nuvem_fiscal, chave_acesso, status, xml_url, danfe_url, numero_nfe, serie_nfe, data_emissao, data_atualizacao) VALUES (:id_empresa, :id_venda, 'NFE', :id_nuvem_fiscal, :chave_acesso, :status, :xml_url, :danfe_url, :numero_nfe, :serie_nfe, NOW(), NOW())");
+            $query = $pdo->prepare("INSERT INTO notas_fiscais (id_empresa, id_venda, tipo_nota, id_nuvem_fiscal, chave_acesso, status, xml_url, danfe_url, numero_nfe, serie_nfe, data_emissao, data_atualizacao) VALUES (:id_empresa, :id_venda, 'NFCE', :id_nuvem_fiscal, :chave_acesso, :status, :xml_url, :danfe_url, :numero_nfe, :serie_nfe, NOW(), NOW())");
             $query->bindValue(":id_venda", $id_venda);
         }
 
         $query->bindValue(":id_empresa", $id_empresa);
-        $query->bindValue(":id_nuvem_fiscal", $id_nfe_nuvem_fiscal);
+        $query->bindValue(":id_nuvem_fiscal", $id_nfce_nuvem_fiscal);
         $query->bindValue(":chave_acesso", $chave_acesso);
         $query->bindValue(":status", $status);
         $query->bindValue(":xml_url", $xml_url);
         $query->bindValue(":danfe_url", $danfe_url);
-        $query->bindValue(":numero_nfe", $numero_nfe);
-        $query->bindValue(":serie_nfe", $serie_nfe);
+        $query->bindValue(":numero_nfe", $numero_nfce); // Reutiliza numero_nfe para NFC-e
+        $query->bindValue(":serie_nfe", $serie_nfce); // Reutiliza serie_nfe para NFC-e
         $query->execute();
 
         $pdo->commit();
-        echo json_encode(['success' => true, 'message' => 'NF-e emitida com sucesso!', 'status' => $status, 'danfe_url' => $danfe_url]);
+        echo json_encode(['success' => true, 'message' => 'NFC-e emitida com sucesso!', 'status' => $status, 'danfe_url' => $danfe_url]);
 
     } catch (PDOException $e) {
         $pdo->rollBack();
-        error_log("Erro no DB ao salvar NF-e: " . $e->getMessage());
-        echo json_encode(['success' => false, 'message' => 'Erro ao salvar NF-e no banco de dados. Contate o suporte.', 'db_error' => $e->getMessage()]);
+        error_log("Erro no DB ao salvar NFC-e: " . $e->getMessage());
+        echo json_encode(['success' => false, 'message' => 'Erro ao salvar NFC-e no banco de dados. Contate o suporte.', 'db_error' => $e->getMessage()]);
     }
 
 } else {

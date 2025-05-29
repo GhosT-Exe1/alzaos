@@ -1,25 +1,26 @@
 <?php
-require_once("../../conexao.php");
-
-// Criar tabela de inutilizações
-$query = $pdo->prepare("CREATE TABLE IF NOT EXISTS nuvem_fiscal_inutilizacoes (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    empresa_id INT NOT NULL,
-    ano INT NOT NULL,
-    serie INT NOT NULL,
-    numero_inicial INT NOT NULL,
-    numero_final INT NOT NULL,
-    justificativa TEXT NOT NULL,
-    protocolo VARCHAR(50),
-    data_protocolo DATETIME,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (empresa_id) REFERENCES empresas(id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+// painel/paginas/fiscal/criar_tabela_inutilizacoes.php
+require_once(__DIR__ . '/../../conexao.php');
 
 try {
-    $query->execute();
-    echo "Tabela de inutilizações criada com sucesso!";
+    $pdo->exec("
+        CREATE TABLE IF NOT EXISTS inutilizacoes (
+            id INT(11) PRIMARY KEY AUTO_INCREMENT,
+            id_empresa INT(11) NOT NULL,
+            cnpj VARCHAR(18) NOT NULL,
+            ano INT(4) NOT NULL,
+            serie VARCHAR(5) NOT NULL,
+            numero_inicial INT(9) NOT NULL,
+            numero_final INT(9) NOT NULL,
+            justificativa TEXT NOT NULL,
+            id_nuvem_fiscal_inut VARCHAR(255) UNIQUE COMMENT 'ID da Inutilização na Nuvem Fiscal',
+            status VARCHAR(50) DEFAULT 'pendente', -- Ex: pendente, autorizada, rejeitada
+            data_inutilizacao DATETIME DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (id_empresa) REFERENCES empresas(id) ON DELETE CASCADE
+        );
+    ");
+    echo "Tabela 'inutilizacoes' criada ou já existente com sucesso!<br>";
 } catch (PDOException $e) {
-    echo "Erro ao criar tabela de inutilizações: " . $e->getMessage();
+    echo "Erro ao criar tabela 'inutilizacoes': " . $e->getMessage() . "<br>";
 }
-?> 
+?>

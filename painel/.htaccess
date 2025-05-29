@@ -43,6 +43,21 @@ RewriteRule ^saidas(.*)$ index.php?pagina=saidas [L]
 RewriteRule ^estoque(.*)$ index.php?pagina=estoque [L]
 
 
+# /api/nfe/emitir -> apis/emitir_nfe.php
+RewriteRule ^api/nfe/emitir/?$ apis/emitir_nfe.php [L,QSA]
+RewriteRule ^api/nfe/consultar/?$ apis/consultar_nfe.php [L,QSA]
+RewriteRule ^api/nfe/cancelar/?$ apis/cancelar_nfe.php [L,QSA]
+RewriteRule ^api/nfe/carta-correcao/?$ apis/carta_correcao.php [L,QSA]
+RewriteRule ^api/nfe/inutilizar/?$ apis/inutilizar_numeros.php [L,QSA]
+RewriteRule ^api/nfe/danfe/?$ apis/gerar_danfe.php [L,QSA]
+
+# Novas rotas para NFC-e
+RewriteRule ^api/nfce/emitir/?$ apis/emitir_nfce.php [L,QSA]
+RewriteRule ^api/nfce/consultar/?$ apis/consultar_nfe.php [L,QSA] # Pode usar o mesmo para consulta
+RewriteRule ^api/nfce/cancelar/?$ apis/cancelar_nfe.php [L,QSA] # Pode usar o mesmo para cancelamento
+# Para danfe NFC-e, o gerar_danfe.php já está adaptado para tipo_nota
+
+
 RewriteRule ^config_fiscal(.*) index.php?pagina=config_fiscal [L]
 RewriteRule ^fiscal(.*) index.php?pagina=fiscal [L]
 
