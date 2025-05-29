@@ -1,0 +1,5 @@
+=== MODO DE TESTE - DOWNLOAD SIMULADO ===
+Data/Hora: 2025-05-27 17:39:57
+Simulando download do PDF para ID da Nuvem Fiscal: mock-id-683621498d4a1.
+=== FIM DO MODO DE TESTE ===
+
