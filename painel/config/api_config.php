@@ -4,8 +4,8 @@ define('API_URL', 'https://api.sandbox.nuvemfiscal.com.br');
 define('AUTH_URL', 'https://auth.nuvemfiscal.com.br/oauth/token');
 
 // Suas credenciais OAuth 2 - Substitua pelos valores obtidos no Console da Nuvem Fiscal
-define('CLIENT_ID', 'a0kWBFCvLS22r3uQqyPi'); // Substitua pelo seu Client ID
-define('CLIENT_SECRET', 'MHiazLWYd3GD4H6ZNloidjQBbk3qK47lpcNPfx2c'); // Substitua pelo seu Client Secret
+define('CLIENT_ID', 'CLIENT_ID'); // Substitua pelo seu Client ID
+define('CLIENT_SECRET', 'CLIENT_SECRET'); // Substitua pelo seu Client Secret
 
 // Configurações do Certificado (ainda mantemos, mas não usaremos nesta etapa de debug)
 define('CERTIFICADO_PATH', __DIR__ . '/../certificados/certificado.pem');
@@ -27,7 +27,7 @@ $GLOBALS['api_headers'] = [
 function verificar_configuracoes() {
     $erros = [];
     
-    if (!defined('CLIENT_ID') || CLIENT_ID === 'a0kWBFCvLS22r3uQqyPi' || !defined('MHiazLWYd3GD4H6ZNloidjQBbk3qK47lpcNPfx2c') || CLIENT_SECRET === 'MHiazLWYd3GD4H6ZNloidjQBbk3qK47lpcNPfx2c') {
+    if (!defined('CLIENT_ID') || CLIENT_ID === 'CLIENT_ID' || !defined('CLIENT_SECRET') || CLIENT_SECRET === 'CLIENT_SECRET') {
         $erros[] = 'Client ID ou Client Secret não configurados corretamente.';
     }
     
